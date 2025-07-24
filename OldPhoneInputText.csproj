@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="OldPhoneInputText.Tests\**" />
+    <EmbeddedResource Remove="OldPhoneInputText.Tests\**" />
+    <None Remove="OldPhoneInputText.Tests\**" />
+  </ItemGroup>
 </Project>
