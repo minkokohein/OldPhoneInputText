@@ -107,5 +107,18 @@ namespace OldPhoneInputText.Tests
             string result = InputConverter.Convert("4433555");
             Assert.Equal(string.Empty, result);
         }
+
+        [Theory]
+        [InlineData("*#", "")] // Backspace on an empty buffer
+        [InlineData("**#", "")] // Multiple backspaces on an empty buffer
+        [InlineData("22**#", "")] // Backspacing to an empty buffer
+        [InlineData("*22#", "B")] // Backspace at the beginning of the input
+        [InlineData("abc#", "")] // Input with only invalid characters
+        [InlineData("2#3#", "A")] // Input after the first send key is ignored
+        [InlineData("#", "")] // Input with only the send key
+        public void Convert_EdgeCases_ReturnsCorrectly(string input, string expected)
+        {
+            Assert.Equal(expected, InputConverter.Convert(input));
+        }
     }
 }
