@@ -3,9 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace OldPhoneInputText.Services
 {
-    public class InputConverter
+    public static class InputConverter
     {
-        private static readonly Dictionary<char, string> Keypad = new()
+        private static readonly IReadOnlyDictionary<char, string> Keypad = new Dictionary<char, string>
         {
             { '2', "ABC" },
             { '3', "DEF" },
@@ -18,7 +18,7 @@ namespace OldPhoneInputText.Services
             { '0', " " }
         };
 
-        public string Convert(string input)
+        public static string Convert(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return string.Empty;

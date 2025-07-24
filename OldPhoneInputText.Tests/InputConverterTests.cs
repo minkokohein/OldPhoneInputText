@@ -4,8 +4,6 @@ namespace OldPhoneInputText.Tests
 {
     public class InputConverterTests
     {
-        private readonly InputConverter _converter = new();
-
         [Theory]
         [InlineData("2", "A")]
         [InlineData("22", "B")]
@@ -15,7 +13,7 @@ namespace OldPhoneInputText.Tests
         [InlineData("0", " ")]
         public void Convert_SingleGroup_ReturnsCorrectLetter(string input, string expected)
         {
-            string result = _converter.Convert(input);
+            string result = InputConverter.Convert(input);
             Assert.Equal(expected, result);
         }
 
@@ -25,21 +23,21 @@ namespace OldPhoneInputText.Tests
             string input = "4433555 555666096667775553";
             string expected = "HELLO WORLD";
 
-            string result = _converter.Convert(input.Replace(" ", ""));
+            string result = InputConverter.Convert(input);
             Assert.Equal(expected, result);
         }
 
         [Fact]
         public void Convert_EmptyString_ReturnsEmpty()
         {
-            string result = _converter.Convert("");
+            string result = InputConverter.Convert("");
             Assert.Equal(string.Empty, result);
         }
 
         [Fact]
         public void Convert_UnknownDigit_IgnoresIt()
         {
-            string result = _converter.Convert("111222");
+            string result = InputConverter.Convert("111222");
             Assert.Equal("C", result); // 111 is ignored, 222 → C
         }
     }
